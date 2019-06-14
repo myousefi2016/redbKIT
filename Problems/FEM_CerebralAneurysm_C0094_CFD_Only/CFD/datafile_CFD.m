@@ -1,6 +1,6 @@
-%   This file is part of redbKIT.
-%   Copyright (c) 2016, Ecole Polytechnique Federale de Lausanne (EPFL)
-%   Author: Federico Negri <federico.negri@epfl.ch>
+%   This file is not part of redbKIT.
+%   Copyright (c) 2019, Clemson University
+%   Author: Mehrdad Yousefi <yousefi@clemson.edu>
 
 % Inlet inward normal
 N1  = [0.3229 0.8899 0.3209];

@@ -1,6 +1,6 @@
-%   This file is part of redbKIT.
-%   Copyright (c) 2016, Ecole Polytechnique Federale de Lausanne (EPFL)
-%   Author: Federico Negri <federico.negri@epfl.ch>
+%   This file is not part of redbKIT.
+%   Copyright (c) 2019, Clemson University
+%   Author: Mehrdad Yousefi <yousefi@clemson.edu>
 
 clear all
 clc
