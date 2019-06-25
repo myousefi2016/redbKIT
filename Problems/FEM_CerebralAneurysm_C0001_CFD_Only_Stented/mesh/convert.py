@@ -13,12 +13,6 @@ def vtkUnstructuredReader(filename):
 
 mesh = vtkUnstructuredReader('C0001.vtu')
 
-objectIds = mesh.GetCellData().GetScalars('ObjectId')
-
-oIds = vtk_to_numpy(objectIds)
-
-oIds_unique = np.unique(oIds)
-
 gmsh_output = []
 
 gmsh_output.append('$MeshFormat')
