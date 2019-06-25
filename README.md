@@ -21,7 +21,7 @@ License
 
 **redbKIT is distributed under BSD 2-clause license**
 
-Copyright (c) 2015-2017, Ecole Polytechnique Fédérale de Lausanne (EPFL)
+Copyright (c) 2015-2019, Ecole Polytechnique Fédérale de Lausanne (EPFL), Clemson University
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -56,5 +56,5 @@ Paola Gervasio (Università degli Studi di Brescia) is gratefully acknowledged f
 
 Contact
 -------
-Should you have any questions regarding `redbKIT`, do not hesitate to contact us by email at <redbkit@gmail.com>.
+Should you have any questions regarding `redbKIT`, do not hesitate to contact us by email at <yousefi@clemson.edu>.
 We also encourage contributions that can help to improve the code or the documentation, and to make `redbKIT` more useful.
