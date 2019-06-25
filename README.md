@@ -49,7 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 Development
 -------
 
-redbKIT was developed and is currently maintained by [`Federico Negri`](https://www.linkedin.com/in/negrifederico/).
+redbKIT was developed by [`Federico Negri`](https://www.linkedin.com/in/negrifederico/) and is currently maintained by [`Mehrdad Yousefi`](https://www.linkedin.com/in/myousefi2016/).
 
 Paola Gervasio (Università degli Studi di Brescia) is gratefully acknowledged for granting the use of parts of the finite element code MLife.
 
