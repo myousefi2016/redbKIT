@@ -14,13 +14,13 @@ data.force{3} = @(x, y, z, t, param)(0.*x.*y);
 data.bcDir_t = @(t) Velocity(t);
 
 % Dirichlet
-data.bcDir{1,5} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(1) * 1 + 0.*x.*y); 
-data.bcDir{2,5} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(2) * 1 + 0.*x.*y); 
-data.bcDir{3,5} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(3) * 1 + 0.*x.*y); 
+data.bcDir{1,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(1) * 1 + 0.*x.*y); 
+data.bcDir{2,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(2) * 1 + 0.*x.*y); 
+data.bcDir{3,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(3) * 1 + 0.*x.*y); 
 
-data.bcDir{1,200} = @(x, y, z, t, param)(0.*x.*y); 
-data.bcDir{2,200} = @(x, y, z, t, param)(0.*x.*y); 
-data.bcDir{3,200} = @(x, y, z, t, param)(0.*x.*y);
+data.bcDir{1,680} = @(x, y, z, t, param)(0.*x.*y); 
+data.bcDir{2,680} = @(x, y, z, t, param)(0.*x.*y); 
+data.bcDir{3,680} = @(x, y, z, t, param)(0.*x.*y);
 
 % initial condition
 data.u0{1}    = @(x, y, z, t, param)(0.*x.*y);
