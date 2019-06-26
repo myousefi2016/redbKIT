@@ -24,7 +24,7 @@ end
 
 if hasOpenMP
     fprintf('\nCompiling with openmp enabled\n');
-    Flags = 'CFLAGS="\$CFLAGS -fopenmp" LDFLAGS="\$LDFLAGS -fopenmp"';
+    Flags = 'CFLAGS="$CFLAGS -fopenmp" LDFLAGS="$LDFLAGS -fopenmp"';
 
 else
     fprintf('\nCompiling without openmp\n');
