@@ -13,4 +13,4 @@ dim      =  3;
 [vertices, boundaries, elements] = msh_to_Mmesh('../mesh/C0001', dim);
 
 %% Solve Fluid
-[U0_Fluid, MESH, DATA] = NSt_Solver(dim, elements, vertices, boundaries, {'P1','P1'}, 'datafile_CFD', [], 'Results/AneurysmStentedC0001_');
+[U0_Fluid, MESH, DATA] = NSt_Solver(dim, elements, vertices, boundaries, {'P1','P1'}, 'datafile_CFD', [], 'Results/AneurysmCoiledC0001_');

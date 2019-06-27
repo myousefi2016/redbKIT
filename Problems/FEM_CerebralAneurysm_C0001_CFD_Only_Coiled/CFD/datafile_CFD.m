@@ -14,17 +14,13 @@ data.force{3} = @(x, y, z, t, param)(0.*x.*y);
 data.bcDir_t = @(t) Velocity(t);
 
 % Dirichlet
-data.bcDir{1,155} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(1) * 1 + 0.*x.*y); 
-data.bcDir{2,155} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(2) * 1 + 0.*x.*y); 
-data.bcDir{3,155} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(3) * 1 + 0.*x.*y); 
+data.bcDir{1,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(1) * 1 + 0.*x.*y); 
+data.bcDir{2,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(2) * 1 + 0.*x.*y); 
+data.bcDir{3,80} = @(x, y, z, t, param)( data.bcDir_t(t)  * N1(3) * 1 + 0.*x.*y); 
 
-data.bcDir{1,80} = @(x, y, z, t, param)(0.*x.*y); 
-data.bcDir{2,80} = @(x, y, z, t, param)(0.*x.*y); 
-data.bcDir{3,80} = @(x, y, z, t, param)(0.*x.*y);
-
-data.bcDir{1,755} = @(x, y, z, t, param)(0.*x.*y);
-data.bcDir{2,755} = @(x, y, z, t, param)(0.*x.*y);
-data.bcDir{3,755} = @(x, y, z, t, param)(0.*x.*y);
+data.bcDir{1,680} = @(x, y, z, t, param)(0.*x.*y); 
+data.bcDir{2,680} = @(x, y, z, t, param)(0.*x.*y); 
+data.bcDir{3,680} = @(x, y, z, t, param)(0.*x.*y);
 
 % initial condition
 data.u0{1}    = @(x, y, z, t, param)(0.*x.*y);
@@ -32,15 +28,15 @@ data.u0{2}    = @(x, y, z, t, param)(0.*x.*y);
 data.u0{3}    = @(x, y, z, t, param)(0.*x.*y);
 
 % flags
-data.flag_dirichlet{1} = [80 155 755];
+data.flag_dirichlet{1} = [80 680];
 
-data.flag_dirichlet{2} = [80 155 755];
+data.flag_dirichlet{2} = [80 680];
 
-data.flag_dirichlet{3} = [80 155 755];
+data.flag_dirichlet{3} = [80 680];
 
-data.flag_neumann{1}   = [230 305 380 455 530 605 680];
-data.flag_neumann{2}   = [230 305 380 455 530 605 680];
-data.flag_neumann{3}   = [230 305 380 455 530 605 680];
+data.flag_neumann{1}   = [155 230 305 380 455 530 605];
+data.flag_neumann{2}   = [155 230 305 380 455 530 605];
+data.flag_neumann{3}   = [155 230 305 380 455 530 605];
 
 % Neumann
 data.bcNeu{1} = @(x, y, z, t, param)(0.*x.*y);
