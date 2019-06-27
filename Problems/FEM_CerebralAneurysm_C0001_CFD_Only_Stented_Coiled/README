@@ -1,0 +1,10 @@
+CFD interaction simulation in a cerebral aneurysm.
+
+The fluid mesh provided in the "mesh" subfolder was obtained using the vmtk software 
+starting from the stl files provided by the Aneurisk project, see
+
+  http://ecm2.mathcs.emory.edu/aneuriskweb/index
+
+Specifically, we consider here the case id C0001.
+
+The "CFD" folder contains the data and main files required to run the simulation.
