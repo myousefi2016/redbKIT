@@ -1,4 +1,4 @@
-function [A_in, F_in, u_D] =  CFD_ApplyBC(A, F, FE_SPACE, FE_SPACE_p, MESH, DATA, t, zero_Dirichlet, U_k)
+function [A_in, F_in, u_D] =  CFD_ApplyBC(A, F, FE_SPACE, FE_SPACE_p, MESH, DATA, t, zero_Dirichlet, U_k, U_k_previous)
 %CSM_APPLYBC apply boundary conditions for CSM problem in 2D/3D
 %
 %   [A_IN, F_IN, U_DIRICHLET] = CFD_ApplyBC(A, F, FE_SPACE, MESH, DATA) given an
@@ -41,6 +41,7 @@ end
 
 if nargin < 9
     U_k = zeros(FE_SPACE.numDof + FE_SPACE_p.numDof,1);
+    U_k_previous = zeros(FE_SPACE.numDof + FE_SPACE_p.numDof,1);
 end
 
 param = DATA.param;
@@ -275,6 +276,7 @@ switch MESH.dim
             for flag = 1 : length(DATA.flag_resistance)
                 
                 [FlowRate, Area, P_average]    = CFD_computeFlowRate(U_k, MESH, FE_SPACE, FE_SPACE_p, DATA.flag_resistance(flag));
+                [FlowRate_previous, Area, P_average_previous]    = CFD_computeFlowRate(U_k_previous, MESH, FE_SPACE, FE_SPACE_p, DATA.flag_resistance(flag));
                 nof         = length(MESH.Resistance_side_Flag{flag});
                 %fprintf('\n Flag %d, Area  = %2.6f', DATA.flag_resistance(flag), Area);
                 
@@ -289,9 +291,9 @@ switch MESH.dim
                 Rrows       = zeros(nbn*nof,1);
                 Rcoef       = Rrows;
                 
-                pressure = DATA.time.dt / (DATA.time.dt + DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag)) ...
-                                 * ( FlowRate * DATA.OutFlow_Resistance(flag) + P_average * DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag) / DATA.time.dt ...
-                                     + DATA.OutFlow_RefPressure(t) );
+                pressure = ((DATA.time.dt^2)/(DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag) + 0.5*DATA.time.dt*DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag)+DATA.time.dt^2)) * (2.0*P_average*((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2)) + (0.5*((DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt))-((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2)))*P_average_previous + (DATA.OutFlow_Resistance(flag) + ((DATA.OutFlow_Inertance(flag))/(DATA.time.dt)))*FlowRate - ((DATA.OutFlow_Inertance(flag))/(DATA.time.dt))*FlowRate_previous); %DATA.time.dt / (DATA.time.dt + DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag)) ...
+                                 %* ( FlowRate * DATA.OutFlow_Resistance(flag) + P_average * DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag) / DATA.time.dt ...
+                                     %+ DATA.OutFlow_RefPressure(t) );
                 
                 x    =  MESH.vertices(1,MESH.boundaries(1:3, MESH.Resistance_side_Flag{flag}));
                 y    =  MESH.vertices(2,MESH.boundaries(1:3, MESH.Resistance_side_Flag{flag}));

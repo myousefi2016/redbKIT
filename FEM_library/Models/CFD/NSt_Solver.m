@@ -77,6 +77,7 @@ for k = 1 : FE_SPACE_v.numComponents
     end
 end
 u = [v0; zeros(FE_SPACE_p.numDof,1)];
+u_previous = [v0; zeros(FE_SPACE_p.numDof,1)];
 if ~isempty(vtk_filename)
     CFD_export_solution(MESH.dim, u(1:FE_SPACE_v.numDof), u(1+FE_SPACE_v.numDof:end), MESH.vertices, MESH.elements, MESH.numNodes, vtk_filename, 0);
 end
@@ -228,7 +229,7 @@ while ( t < tf )
             % Apply boundary conditions
             fprintf('\n -- Apply boundary conditions ... ');
             t_assembly = tic;
-            [A, b, u_D]   =  CFD_ApplyBC(C_NS, F_NS, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 0, u);
+            [A, b, u_D]   =  CFD_ApplyBC(C_NS, F_NS, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 0, u, u_previous);
             t_assembly = toc(t_assembly);
             fprintf('done in %3.3f s\n', t_assembly);
             
@@ -281,7 +282,7 @@ while ( t < tf )
             % Apply boundary conditions
             fprintf('\n -- Apply boundary conditions ... ');
             t_assembly = tic;
-            [A, b]   =  CFD_ApplyBC(Jacobian, -Residual, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 1, u);
+            [A, b]   =  CFD_ApplyBC(Jacobian, -Residual, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 1, u, u_previous);
             t_assembly = toc(t_assembly);
             fprintf('done in %3.3f s\n', t_assembly);
             
@@ -326,7 +327,7 @@ while ( t < tf )
                 % Apply boundary conditions
                 fprintf('\n   -- Apply boundary conditions ... ');
                 t_assembly = tic;
-                [A, b]   =  CFD_ApplyBC(Jacobian, -Residual, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 1, u);
+                [A, b]   =  CFD_ApplyBC(Jacobian, -Residual, FE_SPACE_v, FE_SPACE_p, MESH, DATA, t, 1, u, u_previous);
                 t_assembly = toc(t_assembly);
                 fprintf('done in %3.3f s\n', t_assembly);
                 
@@ -339,6 +340,7 @@ while ( t < tf )
             fprintf('\n -- Norm(U_np1 - U_n) / Norm( U_n ) = %1.2e \n', norm(U_k - u) / norm(u));
 
     end
+    u_previous = u;
     u = U_k;
     
     %% Update BDF
