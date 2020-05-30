@@ -290,8 +290,16 @@ switch MESH.dim
                 
                 Rrows       = zeros(nbn*nof,1);
                 Rcoef       = Rrows;
-                
-                pressure = ((DATA.time.dt^2)/(DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag) + 0.5*DATA.time.dt*DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag)+DATA.time.dt^2)) * (2.0*P_average*((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2)) + (0.5*((DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt))-((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2)))*P_average_previous + (DATA.OutFlow_Resistance(flag) + ((DATA.OutFlow_Inertance(flag))/(DATA.time.dt)))*FlowRate - ((DATA.OutFlow_Inertance(flag))/(DATA.time.dt))*FlowRate_previous); %DATA.time.dt / (DATA.time.dt + DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag)) ...
+
+		detA = DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag) + DATA.time.dt*DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag) + DATA.time.dt^2;
+		aCoeff = 2.0*((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2)) + ((DATA.OutFlow_Resistance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt));
+
+		bCoeff = -((DATA.OutFlow_Inertance(flag)*DATA.OutFlow_Capacity(flag))/(DATA.time.dt^2));
+
+		cCoeff = DATA.OutFlow_Resistance(flag) + ((DATA.OutFlow_Inertance(flag))/(DATA.time.dt));
+
+		dCoeff = -((DATA.OutFlow_Inertance(flag))/(DATA.time.dt));                
+                pressure = ((DATA.time.dt^2)/(detA)) * (aCoeff*P_average + bCoeff*P_average_previous + cCoeff*FlowRate + dCoeff*FlowRate_previous); %DATA.time.dt / (DATA.time.dt + DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag)) ...
                                  %* ( FlowRate * DATA.OutFlow_Resistance(flag) + P_average * DATA.OutFlow_Resistance(flag) * DATA.OutFlow_Capacity(flag) / DATA.time.dt ...
                                      %+ DATA.OutFlow_RefPressure(t) );
                 
